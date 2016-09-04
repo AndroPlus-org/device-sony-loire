@@ -53,7 +53,27 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-TARGET_RECOVERY_FSTAB = device/sony/loire/rootdir/fstab.loire
+#ifeq ($(RECOVERY_VARIANT),twrp)
+TARGET_TWRP_FSTAB := true
+PROJECT_PATH_AGREES := true
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_FSTAB = device/sony/loire/twrp.fstab
+TW_THEME := portrait_hdpi
+TW_HAS_NO_RECOVERY_PARTITION := true
+TW_IGNORE_ABS_MT_TRACKING_ID := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_FUSE_EXFAT := true
+TW_EXTRA_LANGUAGES := true
+TW_NEW_ION_HEAP := true
+TW_MAX_BRIGHTNESS := 4095
+TW_DEFAULT_BRIGHTNESS := 230
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone4/temp
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TARGET_RECOVERY_DEVICE_MODULES := libbinder libgui libui libEGL libGLES_trace libGLESv2 libprotobuf-cpp-lite libsync
+TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/lib64/libbinder.so $(OUT)/system/lib64/libgui.so $(OUT)/system/lib64/libui.so $(OUT)/system/lib64/libEGL.so $(OUT)/system/lib64/libGLES_trace.so $(OUT)/system/lib64/libGLESv2.so $(OUT)/system/lib64/libprotobuf-cpp-lite.so $(OUT)/system/lib64/libsync.so
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom enforcing=0
+#endif
 
 # Wi-Fi definitions for Broadcom solution
 BOARD_WLAN_DEVICE           := bcmdhd

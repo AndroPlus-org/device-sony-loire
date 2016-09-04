@@ -16,9 +16,28 @@ $(call inherit-product, device/sony/common/common.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
-SOMC_PLATFORM := loire
+SOMC_PLATFORM := qcom
 
 SONY_ROOT := device/sony/loire/rootdir
+
+# Recovery
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/fstab.qcom:root/fstab.qcom \
+    $(SONY_ROOT)/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
+    $(SONY_ROOT)/sbin/postrecoveryboot.sh:root/sbin/postrecoveryboot.sh \
+    $(SONY_ROOT)/sbin/qseecomd:root/sbin/qseecomd \
+    $(SONY_ROOT)/vendor/lib64/hw/keystore.msm8952.so:root/vendor/lib64/hw/keystore.msm8952.so \
+    $(SONY_ROOT)/vendor/lib64/lib-sec-disp.so:root/vendor/lib64/lib-sec-disp.so \
+    $(SONY_ROOT)/vendor/lib64/libQSEEComAPI.so:root/vendor/lib64/libQSEEComAPI.so \
+    $(SONY_ROOT)/vendor/lib64/libStDrvInt.so:root/vendor/lib64/libStDrvInt.so \
+    $(SONY_ROOT)/vendor/lib64/libdiag.so:root/vendor/lib64/libdiag.so \
+    $(SONY_ROOT)/vendor/lib64/libdrmfs.so:root/vendor/lib64/libdrmfs.so \
+    $(SONY_ROOT)/vendor/lib64/libdrmtime.so:root/vendor/lib64/libdrmtime.so \
+    $(SONY_ROOT)/vendor/lib64/librpmb.so:root/vendor/lib64/librpmb.so \
+    $(SONY_ROOT)/vendor/lib64/libsecureui.so:root/vendor/lib64/libsecureui.so \
+    $(SONY_ROOT)/vendor/lib64/libsecureui_svcsock.so:root/vendor/lib64/libsecureui_svcsock.so \
+    $(SONY_ROOT)/vendor/lib64/libssd.so:root/vendor/lib64/libssd.so \
+    $(SONY_ROOT)/vendor/lib64/libtime_genoff.so:root/vendor/lib64/libtime_genoff.so
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -53,8 +72,8 @@ PRODUCT_COPY_FILES += \
 
 # Platform Init
 PRODUCT_PACKAGES += \
-    fstab.loire \
-    init.loire.pwr
+    fstab.qcom \
+    init.qcom.pwr
 
 # NFC packages
 PRODUCT_PACKAGES += \
